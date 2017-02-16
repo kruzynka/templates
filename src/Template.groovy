@@ -1,13 +1,23 @@
 class Template {
-    String textWithExpressions
 
     private static final String  EXPRESSION_START = /\$\{/
     private static final String  EXPRESSION_END = /}/
+    // . dowlony znak, * dowolna ich ilość, $ dosłownie, { dosłownie, ^ zaprzeczenie dotyczące [], + przynajmniej raz :
+    private static final String EXPRESSION = /.*\$\{[^}]+\}.*/
 
+    String textWithExpressions
 
     String evaluate(Map<String, String> parameters){
-        //kopia tej zmiennej:
-        String result = textWithExpressions
+        String result = substitute(parameters)
+        if (result =~ EXPRESSION){
+            throw new IllegalArgumentException()
+        }
+        return result
+    }
+
+    private String substitute(Map<String,String> parameters){
+
+        String result = textWithExpressions //kopia tej zmiennej
         //iterujemy po wszystkich elementach:
         parameters.each { name, value ->
             result = result.replaceAll(createExpression(name), value)
@@ -18,4 +28,6 @@ class Template {
     private String createExpression(String name){
         EXPRESSION_START + name+ EXPRESSION_END
     }
+
+
 }
