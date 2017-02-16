@@ -1,3 +1,7 @@
+/**
+ * Dopisujemy kod do testów, mamy pewność 100% pokrycia kodu przez testy
+ * Gdyby klasa zaczęła dziedziczyć inne, musielibyśmy użyć mocków, aby skupić się na fragmencie kodu
+ */
 class Template {
 
     private static final String  EXPRESSION_START = /\$\{/
@@ -28,6 +32,5 @@ class Template {
     private String createExpression(String name){
         EXPRESSION_START + name+ EXPRESSION_END
     }
-
 
 }

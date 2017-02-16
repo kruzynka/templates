@@ -5,8 +5,8 @@ import org.testng.Assert
 import static org.testng.Assert.*
 
 /**
- * Najpier tworzymy test, później dodajemy do niego klasę Template (/scr)
- * W której dodajemy dopiero odpowiednio wyjaśnienie wymienionej w teście metody evaluate
+ * Najpierw tworzymy test, później dodajemy do niego klasę Template (pod /scr)
+ * w której dopiero dodajemy odpowiedni kod programu, który jest testowany w TemplateTest
  */
 class TemplateTest {
 
@@ -14,6 +14,7 @@ class TemplateTest {
     private Template template = new Template(textWithExpressions: 'My name is ${firstName} ${lastName}')
     private parameters = [firstName: 'Jan', lastName: 'Kowalski']
 
+    //tylko na dowód tego, że przeodzę przez kolejne testy
     @Before
     void init() {
         println 'itit'
@@ -22,9 +23,7 @@ class TemplateTest {
     @Test
     void shouldEvaluateWithExpression() {
 
-        Template template = new Template(textWithExpressions: 'My name is ${firstName} ${lastName}')
-        //assert "My name is Jan Kowalski" == template.evaluate([firstName: 'Jan', lastName: 'Kowalski'])
-        //równoważna forma:
+        //równoważna forma: assert EXPECTED_RESULT == template.evaluate(parameters)
         assertEvaluate()
     }
 
